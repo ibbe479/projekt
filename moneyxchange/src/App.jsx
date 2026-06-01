@@ -1,31 +1,32 @@
 import { useState } from "react";
 import Convert from "./Convert";
 import GetList from "./GetList";
+import Graph from "./graf";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="min-h-[calc(100vh+50px)] bg-white text-black">
-      <header>
-        <h1
-          id="rubrik"
-          className="text-center p-3 mb-2 bg-primary-subtle text-primary-emphasis"
-        >
-          Money<em>X</em>change
+    <div className="flex flex-col min-h-screen bg-gray-100 font-sans">
+      <header className="bg-blue-100 shadow-sm border-b border-blue-200">
+        <h1 className="text-center p-6 text-4xl font-bold text-blue-900 tracking-wide">
+          Money<em className="text-blue-600 not-italic">X</em>change
         </h1>
       </header>
 
-      <div className="d-flex flex-row mb-3 gap-[10vh] justify-content-center">
-        <div className="p-2 ">
+      <main className="flex-grow flex flex-col items-center p-8">
+        <div className="flex flex-row flex-wrap gap-8 justify-center items-start w-full">
           <Convert />
-        </div>
-
-        <div className="p-2">
           <GetList />
         </div>
-      </div>
+        
+        <Graph />
+      </main>
+
+      <footer className="bg-gray-800 text-gray-300 text-center p-5 mt-auto">
+        <p className="text-sm tracking-wide">&copy; 2026 MoneyXchange. Alla rättigheter förbehållna.</p>
+      </footer>
     </div>
   );
 }

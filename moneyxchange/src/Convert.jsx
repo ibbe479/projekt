@@ -13,7 +13,7 @@ function Convert() {
     }
 
     var myHeaders = new Headers();
-    myHeaders.append("apikey", "FWrUebpaPLwwCEcCjoyDmclvTTUTZOyH");
+    myHeaders.append("apikey", "Ym6hz3XfsnRVP9TShQpXR4471qb5W4dh");
 
     var requestOptions = {
       method: "GET",
@@ -49,59 +49,57 @@ function Convert() {
   }
 
   return (
-    <div className="d-flex flex-row mb-3 gap-[10vh]">
-      <fieldset className=" text-neutral fieldset bg-primary-subtle border-base-300 rounded-box w-80 h-[50vh]  border p-5 text-base-content shadow-md p-2">
-        <legend className="fieldset-legend text-neutral">Convert</legend>
+    <div className="flex flex-row flex-wrap gap-8 justify-center">
+      <div className="bg-white border-gray-200 rounded-xl w-80 sm:w-96 h-[550px] border shadow-lg p-6 flex flex-col">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Convert</h2>
+        
+        <div className="flex-1">
+          <label className="mb-1 block text-sm font-medium text-gray-700">Vilken valuta vill du växla ifrån</label>
+          <input
+            type="text"
+            placeholder="SEK, USD, GBP"
+            className="w-full bg-gray-50 text-black mb-4 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+            value={valutaFrån}
+            onChange={(e) => setValutaFrån(e.target.value)}
+          />
 
-        <label>vilken valuta vill du växla ifrån</label>
-        <input
-          type="text"
-          placeholder="SEK, USD, GBP"
-          id="Valuta_från"
-          className="input input-bordered w-full bg-white text-black "
-          value={valutaFrån}
-          onChange={(e) => setValutaFrån(e.target.value)}
-        />
+          <label className="mb-1 block text-sm font-medium text-gray-700">Vilken valuta vill du växla till</label>
+          <input
+            type="text"
+            placeholder="SEK, USD, GBP"
+            className="w-full bg-gray-50 text-black mb-4 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+            value={valutaTill}
+            onChange={(e) => setValutaTill(e.target.value)}
+          />
 
-        <label>Vilken valuta vill du växla till</label>
-        <input
-          type="text"
-          placeholder="SEK, USD, GBP"
-          id="Valuta_till"
-          className="input input-bordered w-full bg-white text-black "
-          value={valutaTill}
-          onChange={(e) => setValutaTill(e.target.value)}
-        />
-
-        <label htmlFor="Belopp">Belopp</label>
-        <input
-          type="number"
-          placeholder="Belopp"
-          id="Belopp"
-          value={belopp}
-          className="input input-bordered w-full bg-white text-black mb-4"
-          onChange={(e) => setBelopp(e.target.value)}
-        />
+          <label className="mb-1 block text-sm font-medium text-gray-700">Belopp</label>
+          <input
+            type="number"
+            placeholder="Belopp"
+            value={belopp}
+            className="w-full bg-gray-50 text-black mb-6 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+            onChange={(e) => setBelopp(e.target.value)}
+          />
+        </div>
 
         <button
-          className="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900"
+          className="w-full mt-auto rounded-lg bg-blue-900 px-4 py-3 text-center text-sm font-bold uppercase text-white transition duration-200 ease-in-out hover:bg-blue-800"
           onClick={HanteraKonvertering}
         >
           Convert
         </button>
-      </fieldset>
+      </div>
 
-      <ul
-        id="res"
-        className="text-neutral p-2 bg-primary-subtle border-base-300 rounded-box w-80  h-[50vh] border p-5 text-base-content shadow-md p-2"
-      >
-        <h3 className="">Resultat</h3>
-        {resultatLista.map((item, index) => (
-          <li key={index}>
-            {byggText(item)} <hr />
-          </li>
-        ))}
-      </ul>
+      <div className="bg-white border-gray-200 rounded-xl w-80 sm:w-96 h-[550px] border shadow-lg p-6 flex flex-col">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Resultat</h2>
+        <ul className="overflow-y-auto flex-1 pr-2 custom-scrollbar">
+          {resultatLista.map((item, index) => (
+            <li key={index} className="break-words overflow-wrap-anywhere mb-3 p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-800 text-sm">
+              {byggText(item)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
