@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-[calc(100vh+50px)] bg-white text-black">
       <header>
         <h1
           id="rubrik"
