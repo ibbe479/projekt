@@ -21,13 +21,15 @@ function GetList() {
         }
       })
       .catch((error) => console.log("error", error));
-  }, []); // De tomma hakparenteserna [] här gör att loopen stoppas och körs bara 1 gång!
+  }, []);
 
   return (
     <div>
-      <h1>Lista över alla förkortningar</h1>
-      <ul id="lista">
-        {/* Detta skrev du HELT RÄTT! Det mappar ut objektet perfekt */}
+      <ul
+        id="lista"
+        className="overflow-auto h-[50vh] border p-4 w-80 bg-primary-subtle"
+      >
+        <h1 className="">Förkortningar</h1>
         {Object.entries(lista).map(([key, value]) => (
           <li key={key}>
             {key}: {value}
