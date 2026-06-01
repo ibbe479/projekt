@@ -95,7 +95,7 @@ function Convert() {
         id="res"
         className="text-neutral p-2 bg-primary-subtle border-base-300 rounded-box w-80  h-[50vh] border p-5 text-base-content shadow-md p-2"
       >
-        <h3>Resultat</h3>
+        <h3 className="">Resultat</h3>
         {resultatLista.map((item, index) => (
           <li key={index}>
             {byggText(item)} <hr />

@@ -8,12 +8,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white text-black">
-      <h1
-        id="rubrik"
-        className="text-center p-3 mb-2 bg-primary-subtle text-primary-emphasis"
-      >
-        Money<em>X</em>change
-      </h1>
+      <header>
+        <h1
+          id="rubrik"
+          className="text-center p-3 mb-2 bg-primary-subtle text-primary-emphasis"
+        >
+          Money<em>X</em>change
+        </h1>
+      </header>
+
       <div className="d-flex flex-row mb-3 gap-[10vh] justify-content-center">
         <div className="p-2 ">
           <Convert />
