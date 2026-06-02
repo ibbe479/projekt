@@ -18,7 +18,7 @@ function App() {
       <main className="flex-grow flex flex-col items-center p-8">
         <div className="flex flex-row flex-wrap gap-8 justify-center items-start w-full">
           <Convert />
-          <GetList />*
+          <GetList />
         </div>
 
         <Graf />
