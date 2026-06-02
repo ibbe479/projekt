@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Convert from "./Convert";
 import GetList from "./GetList";
-import Graph from "./graf";
+import Graf from "./Graf";
 import "./App.css";
 
 function App() {
@@ -18,14 +18,16 @@ function App() {
       <main className="flex-grow flex flex-col items-center p-8">
         <div className="flex flex-row flex-wrap gap-8 justify-center items-start w-full">
           <Convert />
-          <GetList />
+          <GetList />*
         </div>
-        
-        <Graph />
+
+        <Graf />
       </main>
 
       <footer className="bg-gray-800 text-gray-300 text-center p-5 mt-auto">
-        <p className="text-sm tracking-wide">&copy; 2026 MoneyXchange. Alla rättigheter förbehållna.</p>
+        <p className="text-sm tracking-wide">
+          &copy; 2026 MoneyXchange. Alla rättigheter förbehållna.
+        </p>
       </footer>
     </div>
   );
