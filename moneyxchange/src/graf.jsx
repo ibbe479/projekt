@@ -1,47 +1,111 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-//DETTA ÄR ETT EXEMPEL fIXA detta till live
+import { useState, useEffect } from "react";
+import Chart from "react-apexcharts";
 
-const mockData = [
-  { name: 'Mån', kurs: 10.42 },
-  { name: 'Tis', kurs: 10.51 },
-  { name: 'Ons', kurs: 10.38 },
-  { name: 'Tors', kurs: 10.65 },
-  { name: 'Fre', kurs: 10.72 },
-  { name: 'Lör', kurs: 10.68 },
-  { name: 'Sön', kurs: 10.55 },
-];
+function Graf() {
+  const [loading, setLoading] = useState(true);
+  const [valutaInput, setValutaInput] = useState("SEK");
+  const [quotes, setQuotes] = useState({});
+  const [sökTrigger, setSökTrigger] = useState(0);
 
-function Graph() {
+  const end_date = new Date().toISOString().split("T")[0];
+  const d = new Date();
+  d.setMonth(d.getMonth() - 1);
+  const start_date = d.toISOString().split("T")[0];
+
+  function hanteraSökning(e) {
+    e.preventDefault();
+    setValutaInput(valutaInput.toUpperCase().trim());
+    setSökTrigger((prev) => prev + 1);
+  }
+  useEffect(() => {
+    setLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", import.meta.env.VITE_API_KEY);
+
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: myHeaders,
+    };
+
+    fetch(
+      `https://api.apilayer.com/currency_data/timeframe?start_date=${start_date}&end_date=${end_date}`,
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setQuotes(result.quotes || {});
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        setLoading(false);
+      });
+  }, [sökTrigger]);
+
+  const options = {
+    title: {
+      text: ` USDx${valutaInput}`,
+      align: "center",
+      style: {
+        fontSize: "18px",
+        fontWeight: "bold",
+      },
+    },
+    xaxis: {
+      categories: Object.keys(quotes),
+    },
+  };
+
+  const series = [
+    {
+      name: `USDx${valutaInput}`,
+      data: Object.keys(quotes).map(
+        (date) => quotes[date][`USD${valutaInput}`],
+      ),
+    },
+  ];
+
   return (
-    <div className="bg-white border-gray-200 rounded-xl w-full max-w-5xl border shadow-lg p-6 mt-8 flex flex-col items-center overflow-x-auto">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3 w-full text-left">Valutakurs Trend (Exempeldata)</h2>
-      <div className="w-full min-w-[600px] flex justify-center">
-        <LineChart
-          width={800}
-          height={300}
-          data={mockData}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+    <div className="flex flex-col md:flex-row justify-evenly items-center md:items-start gap-6 bg-white p-6 rounded-xl border shadow-lg mt-8 w-full ">
+      <form onSubmit={hanteraSökning} className="w-full md:w-1/4 p-2">
+        <label className="mb-2 block text-sm font-semibold text-gray-700">
+          Vilken valuta vill du jämföra mot USD?
+        </label>
+        <input
+          type="text"
+          placeholder="SEK, EUR, GBP"
+          maxLength={3}
+          className="w-full bg-gray-50 text-black p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none uppercase font-bold mb-3"
+          value={valutaInput}
+          onChange={(e) => setValutaInput(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-200 uppercase text-sm"
         >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-          <XAxis dataKey="name" stroke="#6b7280" />
-          <YAxis domain={['auto', 'auto']} stroke="#6b7280" />
-          <Tooltip 
-            contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
-          />
-          <Legend wrapperStyle={{ paddingTop: '20px' }}/>
-          <Line 
-            type="monotone" 
-            dataKey="kurs" 
-            name="Växelkurs"
-            stroke="#1e3a8a" 
-            activeDot={{ r: 8 }} 
-            strokeWidth={3} 
-          />
-        </LineChart>
+          Visa i graf
+        </button>
+      </form>
+
+      <div className="w-full md:w-3/4 p-2 flex justify-center items-center min-h-[350px]">
+        {loading ? (
+          <span className="loading loading-dots loading-lg text-blue-900"></span>
+        ) : (
+          <div className="mixed-chart w-full">
+            <Chart
+              options={options}
+              series={series}
+              type="line"
+              height="350"
+              width="100%"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default Graph;
+export default Graf;

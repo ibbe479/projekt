@@ -13,7 +13,7 @@ function Convert() {
     }
 
     var myHeaders = new Headers();
-    myHeaders.append("apikey", "Ym6hz3XfsnRVP9TShQpXR4471qb5W4dh");
+    myHeaders.append("apikey", import.meta.env.VITE_API_KEY);
 
     var requestOptions = {
       method: "GET",
@@ -51,10 +51,14 @@ function Convert() {
   return (
     <div className="flex flex-row flex-wrap gap-8 justify-center">
       <div className="bg-white border-gray-200 rounded-xl w-80 sm:w-96 h-[550px] border shadow-lg p-6 flex flex-col">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Convert</h2>
-        
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">
+          Convert
+        </h2>
+
         <div className="flex-1">
-          <label className="mb-1 block text-sm font-medium text-gray-700">Vilken valuta vill du växla ifrån</label>
+          <label className="mb-1 block text-sm font-medium text-gray-700">
+            Vilken valuta vill du växla ifrån
+          </label>
           <input
             type="text"
             placeholder="SEK, USD, GBP"
@@ -63,7 +67,9 @@ function Convert() {
             onChange={(e) => setValutaFrån(e.target.value)}
           />
 
-          <label className="mb-1 block text-sm font-medium text-gray-700">Vilken valuta vill du växla till</label>
+          <label className="mb-1 block text-sm font-medium text-gray-700">
+            Vilken valuta vill du växla till
+          </label>
           <input
             type="text"
             placeholder="SEK, USD, GBP"
@@ -72,7 +78,9 @@ function Convert() {
             onChange={(e) => setValutaTill(e.target.value)}
           />
 
-          <label className="mb-1 block text-sm font-medium text-gray-700">Belopp</label>
+          <label className="mb-1 block text-sm font-medium text-gray-700">
+            Belopp
+          </label>
           <input
             type="number"
             placeholder="Belopp"
@@ -91,10 +99,15 @@ function Convert() {
       </div>
 
       <div className="bg-white border-gray-200 rounded-xl w-80 sm:w-96 h-[550px] border shadow-lg p-6 flex flex-col">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Resultat</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">
+          Resultat
+        </h2>
         <ul className="overflow-y-auto flex-1 pr-2 custom-scrollbar">
           {resultatLista.map((item, index) => (
-            <li key={index} className="break-words overflow-wrap-anywhere mb-3 p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-800 text-sm">
+            <li
+              key={index}
+              className="break-words overflow-wrap-anywhere mb-3 p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-800 text-sm"
+            >
               {byggText(item)}
             </li>
           ))}
