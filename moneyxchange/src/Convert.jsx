@@ -4,7 +4,15 @@ function Convert() {
   const [valutaTill, setValutaTill] = useState("");
   const [valutaFrån, setValutaFrån] = useState("");
   const [belopp, setBelopp] = useState("");
-  const [resultatLista, setResultatLista] = useState([]);
+  const [resultatLista, setResultatLista] = useState(() => {
+    const sparadLista = localStorage.getItem("valutaResultat");
+
+    if (sparadLista) {
+      return JSON.parse(sparadLista);
+    } else {
+      return [];
+    }
+  });
 
   function HanteraKonvertering() {
     if (!valutaTill || !valutaFrån || !belopp) {
@@ -35,7 +43,9 @@ function Convert() {
         };
 
         const LitsanMedAllt = [...resultatLista, nyKonvertering];
-        setResultatLista(LitsanMedAllt.slice(-5));
+        const uppdateradLista = LitsanMedAllt.slice(-5);
+        setResultatLista(uppdateradLista);
+        localStorage.setItem("valutaResultat", JSON.stringify(uppdateradLista));
 
         setValutaFrån("");
         setValutaTill("");
