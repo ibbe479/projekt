@@ -6,6 +6,21 @@ Det här är en React applikation som vi har byggt för att hantera valutor på 
 
 Appen är uppdelad i två huvudsidor via React Router:
 
+# Förutsättningar 
+
+För att kunna köra projektet behöver du ha Node.js installerat på din dator. Om du inte har det kan du ladda ner det från nodejs.org.
+
+# Komma igång/start 
+
+Följ dessa steg i din terminal för att starta applikationen: 
+  1. Navigera till projektmappen
+  2. Du ska vara i moneyxchange (cd moneyxchange)
+  3. installera alla paket, "npm install" i terminalen
+  4. Konfiguera API-nyckeln: Skapa en fil med namnet .env i projektets rotmapp (samma mapp som package.json ligger, alltså utanför src-mappen).¨'
+  5. Öppna filen och klistra in följande rad: VITE_API_KEY=GHbEXMDOsioAFV41ZibTnI0QFY1dVtsU
+  6. Starta upp terminalen, skriv "npm run dev" och ENTER.
+  7. Klicka på länken som visas i terminalen (http://localhost:5173) för att öppna applikationen i din webbläsare.
+     
 # Första sidan "/"
 
 Convert.jsx: Här kan man skriva in ett belopp och växla från en valuta till en annan. De 5 senaste sökningarna sparas i en lista med hjälp av localStorage.
