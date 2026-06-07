@@ -1,16 +1,28 @@
-# React + Vite
+# MoneyXchange - Projektarbete
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Det här är en React applikation som vi har byggt för att hantera valutor på olika sätt. Den använder ett externt API för att hämta växelkurser i realtid.
 
-Currently, two official plugins are available:
+# Sidor och Funktioner
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Appen är uppdelad i två huvudsidor via React Router:
 
-## React Compiler
+# Första sidan "/"
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Convert.jsx: Här kan man skriva in ett belopp och växla från en valuta till en annan. De 5 senaste sökningarna sparas i en lista med hjälp av localStorage.
 
-## Expanding the ESLint configuration
+GetList.jsx: Visar en lista med alla världens valutaförkortningar och namn. Det finns också ett sökfält så man lätt kan filtrera listan.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Graf.jsx Visar en linjegraf över hur en vald valuta har rört sig mot dollarn under de senaste 30 dagarna. Valutan kommer alltid att börja med SEK.
+
+# Andra sidan "/trading"
+
+En spelsida där man startar med 1 000 kr.
+Man kan välja att trycka på Buy om man tror USD/SEK ska stiga eller Sell om man tror den ska sjunka.
+När man trycker på Close Trade räknas vinsten eller förlusten ut baserat på hur kursen har ändrats, och saldot uppdateras. Statusen sparas i localStorage så att spelet kommer ihåg var man var
+
+# API nycklar
+
+Skapa en .env fil som ska ligga i moenyxchange filen men utanför src.
+sprara API nyckeln så VITE_API_KEY=nyckeln_här
+API nyckeln vi har är GHbEXMDOsioAFV41ZibTnI0QFY1dVtsU
+Om den inte funkar kan du antigen kontakta abdullahalshammari12 eller ibbe5413 på dc
